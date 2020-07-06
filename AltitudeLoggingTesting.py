@@ -8,7 +8,7 @@ import datetime
 #############################################
 TRIG = 4
 ECHO = 18
-RunForMinutes = 5
+RunForMinutes = 1
 RefreshEverySeconds = 0.50
 ##############################################
 
