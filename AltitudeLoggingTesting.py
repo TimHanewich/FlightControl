@@ -9,7 +9,7 @@ import datetime
 TRIG = 4
 ECHO = 18
 LED = 21
-RunForMinutes = 1
+RunForMinutes = 8
 RefreshEverySeconds = 0.50
 ##############################################
 
@@ -24,7 +24,7 @@ al = AltitudeLogging.AltitudeLogger()
 
 
 #before starting, give a warning
-for i in range(10):
+for i in range(20):
 	GPIO.output(LED, True)
 	time.sleep(0.25)
 	GPIO.output(LED, False)
