@@ -9,6 +9,7 @@ import datetime
 TRIG = 4
 ECHO = 18
 LED = 21
+PRESS_TO_START = 12
 RunForMinutes = 8
 RefreshEverySeconds = 0.50
 ##############################################
@@ -18,6 +19,21 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setup(TRIG, GPIO.OUT)
 GPIO.setup(ECHO, GPIO.IN)
 GPIO.setup(LED, GPIO.OUT) #indicator light
+GPIO.setup(PRESS_TO_START, GPIO.IN) #Press to fire
+
+
+#wait until we press to start
+while GPIO.input(12) == True:
+	GPIO.output(LED, True)
+	time.sleep(0.10)
+	GPIO.output(LED, False)
+	time.sleep(0.10)
+	GPIO.output(LED, True)
+	time.sleep(0.10)
+	GPIO.output(LED, False)
+	time.sleep(1.5)
+	print("Waiting for trigger")
+
 
 
 al = AltitudeLogging.AltitudeLogger()
