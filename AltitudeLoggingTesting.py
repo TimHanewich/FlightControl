@@ -15,8 +15,7 @@ RefreshEverySeconds = 0.50
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(TRIG, GPIO.OUT)
-GPIO.setup(TRIG, True)
-GPIO.setup(ECHO, False)
+GPIO.setup(ECHO, GPIO.IN)
 
 al = AltitudeLogging.AltitudeLogger()
 
@@ -44,12 +43,14 @@ while kill == False:
     time.sleep(RefreshEverySeconds)
 
     elapsed_time = datetime.datetime.now() - starttime
-    if elapsed_time.minute > RunForMinutes:
+    elapsed_time: datetime.timedelta
+    elapsed_mins = elapsed_time.total_seconds() / 60
+    if elapsed_mins > RunForMinutes:
         kill = True
     else:
         kill = False
-        time_left = RunForMinutes - elapsed_time.minute
-        print(str(elapsed_time.minute) + " elapsed. Continuing for " + str(time_left) + " minutes")
+        time_left = RunForMinutes - elapsed_mins
+        print(str(elapsed_mins) + " elapsed. Continuing for " + str(time_left) + " minutes")
 
 
 print("Exporting to CSV...")
