@@ -8,6 +8,7 @@ import datetime
 #############################################
 TRIG = 4
 ECHO = 18
+LED = 21
 RunForMinutes = 1
 RefreshEverySeconds = 0.50
 ##############################################
@@ -16,9 +17,12 @@ RefreshEverySeconds = 0.50
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(TRIG, GPIO.OUT)
 GPIO.setup(ECHO, GPIO.IN)
+GPIO.setup(LED, GPIO.OUT) #indicator light
 
 al = AltitudeLogging.AltitudeLogger()
 
+#turn on indicator
+GPIO.output(LED, True)
 starttime = datetime.datetime.now()
 kill = False
 while kill == False:
@@ -53,6 +57,7 @@ while kill == False:
         print(str(elapsed_mins) + " elapsed. Continuing for " + str(time_left) + " minutes")
 
 
+GPIO.output(LED, False)
 print("Exporting to CSV...")
 al.ExportAltitudeLogsToCsv("/AltitudeLogs.csv")
 print("Program complete.")
