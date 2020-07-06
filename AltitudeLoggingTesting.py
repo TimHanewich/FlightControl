@@ -19,7 +19,19 @@ GPIO.setup(TRIG, GPIO.OUT)
 GPIO.setup(ECHO, GPIO.IN)
 GPIO.setup(LED, GPIO.OUT) #indicator light
 
+
 al = AltitudeLogging.AltitudeLogger()
+
+
+#before starting, give a warning
+for i in range(10):
+	GPIO.output(LED, True)
+	time.sleep(0.25)
+	GPIO.output(LED, False)
+	time.sleep(0.25)
+
+
+
 
 #turn on indicator
 GPIO.output(LED, True)
